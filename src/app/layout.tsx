@@ -32,14 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <section>
+      <section className=" w-full h-screen">
       <header className="flex px-5 py-3 bg-slate-800 justify-between items-center">
         <div className="flex justify-between items-center">
           <div>
             <Image src='' alt="img"/>
           </div>
           <div>logo text</div>
-        
         </div>
         <div className="flex justify-between gap-x-2 items-center">
           <div className="flex justify-between gap-x-5 items-center">
@@ -59,7 +58,7 @@ export default function RootLayout({
           </div>
         </div>
       </header>
-      <div>{children}</div>
+      <div className="h-[calc(100vh-48px)]">{children}</div>
       </section>
       </body>
     </html>
