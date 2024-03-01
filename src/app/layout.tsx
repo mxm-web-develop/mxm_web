@@ -32,14 +32,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-      <section className=" w-full h-screen">
+      <section className=" w-full h-screen  overflow-y-clip">
       <header className="flex px-5 py-3 bg-slate-800 justify-between items-center">
-        <div className="flex justify-between items-center">
-          <div>
-            <Image src='' alt="img"/>
-          </div>
-          <div>logo text</div>
-        </div>
+        <Link  href={'/'} className="flex gap-x-3 cursor-pointer justify-between items-center">
+            <Image src='/ai.png' width={32} height={32} alt="img"/>
+          <div className=" text-md"> HFOpenLab</div>
+        </Link>
         <div className="flex justify-between gap-x-2 items-center">
           <div className="flex justify-between gap-x-5 items-center">
             {
