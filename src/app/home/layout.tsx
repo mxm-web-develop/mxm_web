@@ -10,7 +10,7 @@ export default function HomeLayout(
     <div className=' flex flex-col item-center'>
       <section>banner</section>
       <section>{children}</section>
-      <section>footer</section>
+      <section>footer hahha</section>
     </div>
   )
 }
