@@ -3,16 +3,7 @@ import { Listbox, Transition } from '@headlessui/react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 
 const people = [
-  { id: 1, name: 'Wade Cooper' },
-  { id: 2, name: 'Arlene Mccoy' },
-  { id: 3, name: 'Devon Webb' },
-  { id: 4, name: 'Tom Cook' },
-  { id: 5, name: 'Tanya Fox' },
-  { id: 6, name: 'Hellen Schmidt' },
-  { id: 7, name: 'Caroline Schultz' },
-  { id: 8, name: 'Mason Heaney' },
-  { id: 9, name: 'Claudie Smitham' },
-  { id: 10, name: 'Emil Schaefer' },
+  { id: 1, name: 'Genimi Pro' },
 ]
 interface SelectProp {
   label?:string
@@ -22,8 +13,8 @@ function classNames(...classes:any[]) {
 }
 
 export default function Select(props:SelectProp) {
-  const [selected, setSelected] = useState(people[3])
-  const {label} =props
+  const [selected, setSelected] = useState(people[0])
+  const {label='选择模型'} =props
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
@@ -50,7 +41,7 @@ export default function Select(props:SelectProp) {
                     key={person.id}
                     className={({ active }) =>
                       classNames(
-                        active ? 'bg-indigo-600 text-white' : 'text-gray-900',
+                        active ? 'bg-sky-600 text-white' : 'text-gray-900',
                         'relative cursor-default select-none py-2 pl-8 pr-4'
                       )
                     }
