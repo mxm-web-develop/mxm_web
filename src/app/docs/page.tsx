@@ -3,8 +3,8 @@ import Hello from '@/app/content/hello.mdx'
 
 export default function DocsPage(){
   return (
-    <div>
+    <article className=' px-24 container prose prose-amber'>
       <Hello />
-    </div>
+    </article>
   )
 }

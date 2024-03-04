@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import "./globals.css";
-
+import {BellIcon,UserIcon} from '@heroicons/react/20/solid'
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -12,15 +12,15 @@ export const metadata: Metadata = {
 };
 const Navbar = [
   {
-    name: "LLM",
+    name: "大模型",
     link: "/llm",
   },
   {
-    name: "AI Agents",
+    name: "AI代理",
     link: "/agents",
   },
   {
-    name: "Docs",
+    name: "说明文档",
     link: "/docs",
   },
 ]
@@ -34,12 +34,12 @@ export default function RootLayout({
       <body className={inter.className}>
       <section className=" w-full h-screen  overflow-y-clip">
       <header className="flex px-5 py-3 bg-slate-800 justify-between items-center">
-        <Link  href={'/'} className="flex gap-x-3 cursor-pointer justify-between items-center">
+        <Link  href={'/'} className="flex gap-x-3  cursor-pointer justify-between items-center">
             <Image src='/ai.png' width={32} height={32} alt="img"/>
           <div className=" text-md"> HFOpenLab</div>
         </Link>
-        <div className="flex justify-between gap-x-2 items-center">
-          <div className="flex justify-between gap-x-5 items-center">
+        <div className="flex justify-between gap-x-3 items-center">
+          <div className="flex justify-between mr-5 gap-x-5 items-center">
             {
               Navbar.map((item, index) => (
                 <Link href={item.link} key={index}>
@@ -49,10 +49,10 @@ export default function RootLayout({
             }
           </div>
           <div className=" cursor-pointer">
-            info
+            <BellIcon className="w-5 h-5" />
           </div>
           <div className=" cursor-pointer">
-            user
+            <UserIcon className="w-5 h-5" /> 
           </div>
         </div>
       </header>
