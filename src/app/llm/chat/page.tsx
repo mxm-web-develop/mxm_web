@@ -2,11 +2,8 @@ import { ReactNode } from "react";
 import { NextPage } from 'next';
 import Template from "./template";
 
-interface ChatProps {
-  children: ReactNode;
-}
 
-const ChatPage: NextPage<ChatProps> = ({ children }) => {
+export default function ChatPage({children}:{children:ReactNode}) {
   return (
     <>
       <Template key={'chat_template'}>{children}</Template>
@@ -14,4 +11,3 @@ const ChatPage: NextPage<ChatProps> = ({ children }) => {
   );
 };
 
-export default ChatPage;

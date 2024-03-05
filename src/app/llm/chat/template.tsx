@@ -1,3 +1,4 @@
+'use client'
 import { ReactNode } from "react"
 import Chatbox from "./_components/Chatbox"
 import Sidebar from './_components/Sidebar';

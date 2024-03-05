@@ -8,6 +8,6 @@ export async function POST(
   res: Response
 ) {
   const b = await axios.get('https://jsonplaceholder.typicode.com/todos/1')
-  console.log(b)
+ 
   return Response.json(b.data)
 }
