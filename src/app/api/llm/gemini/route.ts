@@ -3,6 +3,9 @@ import { PrismaClient } from '@prisma/client';
 import axios from 'axios';
 import { NextResponse } from 'next/server';
 import { GoogleGenerativeAI } from '@google/generative-ai'
+import Redis from 'ioredis';
+
+const redis = new Redis(); // 你可能需要根据你的Redis配置提供参数
 
 const genAI = new GoogleGenerativeAI('AIzaSyBW6663KQQxmFNcEKOfnzoYXimQLA6yqWE');
 const generationConfig = {
@@ -13,32 +16,36 @@ const generationConfig = {
   topK: 16,
 };
 export  async function POST(req: Request, res: NextApiResponse) {
-  // const { email, password,confirm_password,captcha,phone } = await req.json()
-  //AIzaSyBW6663KQQxmFNcEKOfnzoYXimQLA6yqWE
+  const { message } = await req.json(); // 从请求体中获取消息
 
-  const model = genAI.getGenerativeModel({ model: "gemini-pro"});
+  const userIp = req.headers.get('x-forwarded-for')
+  
+  
+
+  // 从Redis中获取用户的聊天历史
+  const historyJson = await redis.get(`${userIp}`);
+  const userChatHistory = historyJson ? JSON.parse(historyJson) : [];
+   console.log("userChatHistory",userChatHistory)
+  const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+
   const chat = model.startChat({
-    history: [
-      {
-        role: "user",
-        parts: "Hello, I have 2 dogs in my house.",
-      },
-      {
-        role: "model",
-        parts: "Great to meet you. What would you like to know?",
-      },
-    ],
+    history: userChatHistory,
     generationConfig: {
       maxOutputTokens: 2000,
     },
   });
-  const msg = "How many paws are in my house?";
 
-  const result = await chat.sendMessage(msg);
+  const result = await chat.sendMessage(message);
   const response = await result.response;
   const text = response.text();
-  console.log(text);
-  return Response.json({
-    data:text
-  }) 
+
+  // 更新用户的聊天历史
+  userChatHistory.push({ role: "user", parts: message });
+  userChatHistory.push({ role: "model", parts: text });
+  console.log(userIp)
+  // 将新的聊天历史保存到Redis
+  await redis.set(`${userIp}`, JSON.stringify(userChatHistory), 'EX', 86400); // 设置24小时的过期时间
+
+  // 返回响应
+  return Response.json({data: text},{status:200}) 
 }

@@ -2,6 +2,7 @@
 import { ReactNode } from "react"
 import Chatbox from "./_components/Chatbox"
 import Sidebar from './_components/Sidebar';
+import axios from "axios";
 
 interface ChatProps{
   children:ReactNode
@@ -9,6 +10,8 @@ interface ChatProps{
 
 export default function Template(props:ChatProps){
   const {children} = props
+
+
   return(
     <div className="flex w-full h-full items-center justify-start">
       <div className="flex-grow h-full">
